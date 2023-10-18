@@ -3,9 +3,10 @@ package br.com.alcimar.borutoapp.domain.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import br.com.alcimar.borutoapp.util.Constants.DETAILS_ARGUMENT_KEY
+import br.com.alcimar.borutoapp.util.Constants.HERO_DATABASE_TABLE
 import java.net.ProtocolFamily
 
-@Entity(tableName = DETAILS_ARGUMENT_KEY)
+@Entity(tableName = HERO_DATABASE_TABLE)
 data class Hero(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
