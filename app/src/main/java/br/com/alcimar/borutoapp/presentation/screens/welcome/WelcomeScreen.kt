@@ -19,16 +19,22 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import br.com.alcimar.borutoapp.R
 import br.com.alcimar.borutoapp.domain.model.OnBoardingPage
+import br.com.alcimar.borutoapp.navigation.Screen
 import br.com.alcimar.borutoapp.ui.theme.*
+import br.com.alcimar.borutoapp.util.Constants.LAST_ON_BOARDING_PAGE
 import br.com.alcimar.borutoapp.util.Constants.ON_BOARDING_PAGE_COUNT
 import com.google.accompanist.pager.*
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalAnimationApi::class)
 @Composable
-fun WelcomeScreen(navController: NavHostController) {
+fun WelcomeScreen(
+    navController: NavHostController,
+    welcomeViewModel: WelcomeViewModel = hiltViewModel()
+) {
     val pages = listOf(
         OnBoardingPage.First,
         OnBoardingPage.Second,
@@ -63,7 +69,9 @@ fun WelcomeScreen(navController: NavHostController) {
             modifier = Modifier.weight(1f),
             pagerState = pagerState
         ) {
-
+            navController.popBackStack()
+            navController.navigate(Screen.Home.route)
+            welcomeViewModel.saveOnBoardingSate(completed = true)
         }
     }
 }
@@ -125,7 +133,7 @@ fun FinishButton(
     ) {
         AnimatedVisibility(
             modifier = Modifier.fillMaxWidth(),
-            visible = pagerState.currentPage == 2
+            visible = pagerState.currentPage == LAST_ON_BOARDING_PAGE
         ) {
             Button(
                 onClick = onClick,
