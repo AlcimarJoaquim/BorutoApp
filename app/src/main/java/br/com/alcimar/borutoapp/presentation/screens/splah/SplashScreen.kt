@@ -24,6 +24,7 @@ import br.com.alcimar.borutoapp.navigation.Screen
 import br.com.alcimar.borutoapp.ui.theme.Purple500
 import br.com.alcimar.borutoapp.ui.theme.Purple700
 
+
 @Composable
 fun SplashScreen(
     navController: NavHostController,
