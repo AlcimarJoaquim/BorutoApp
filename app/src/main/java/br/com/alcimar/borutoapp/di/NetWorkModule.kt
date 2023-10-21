@@ -24,7 +24,7 @@ object NetWorkModule {
         return OkHttpClient.Builder()
             .readTimeout(15, TimeUnit.MINUTES)
             .connectTimeout(15, TimeUnit.MINUTES)
-            .build()]
+            .build()
     }
 
     @Provides
