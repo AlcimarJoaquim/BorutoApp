@@ -5,6 +5,7 @@ import br.com.alcimar.borutoapp.data.repository.DataStoreOperartionsImpl
 import br.com.alcimar.borutoapp.data.repository.Repository
 import br.com.alcimar.borutoapp.domain.repository.DataStoreOperations
 import br.com.alcimar.borutoapp.domain.uses_cases.UsesCases
+import br.com.alcimar.borutoapp.domain.uses_cases.get_all_heroes.GetAllHeroesUseCase
 import br.com.alcimar.borutoapp.domain.uses_cases.read_onboarding.ReadOnBoardingUseCase
 import br.com.alcimar.borutoapp.domain.uses_cases.save_onboarding.SaveOnBoardingUseCase
 import dagger.Module
@@ -30,7 +31,8 @@ object RepositoryModule {
     fun providesUseCases(repository: Repository): UsesCases{
         return UsesCases(
             saveOnBoardingUseCase = SaveOnBoardingUseCase(repository),
-            readOnBoardingUseCase = ReadOnBoardingUseCase(repository)
+            readOnBoardingUseCase = ReadOnBoardingUseCase(repository),
+            getAllHeroesUseCase = GetAllHeroesUseCase(repository)
         )
     }
 }
