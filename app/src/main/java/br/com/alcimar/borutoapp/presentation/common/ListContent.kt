@@ -1,8 +1,11 @@
 package br.com.alcimar.borutoapp.presentation.common
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.MaterialTheme
@@ -21,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.items
 import br.com.alcimar.borutoapp.R
 import br.com.alcimar.borutoapp.domain.model.Hero
 import br.com.alcimar.borutoapp.navigation.Screen
@@ -35,7 +39,22 @@ fun ListContent(
     heroes: LazyPagingItems<Hero>,
     navController: NavHostController
 ) {
-
+    Log.d("ListContent", heroes.loadState.toString())
+    LazyColumn(
+        contentPadding = PaddingValues(all = SMALL_PADDING),
+        verticalArrangement = Arrangement.spacedBy(SMALL_PADDING)
+    ) {
+        items(
+            items = heroes,
+            key = { hero ->
+                hero.id
+            }
+        ) { hero ->
+            hero?.let {
+                HeroItem(hero = it, navController = navController)
+            }
+        }
+    }
 }
 
 @OptIn(ExperimentalCoilApi::class)
@@ -57,7 +76,7 @@ fun HeroItem(
             },
         contentAlignment = Alignment.BottomStart
     ) {
-        Surface(shape = Shapes.large) {
+        Surface(shape = RoundedCornerShape(size = LARGE_PADDING)) {
             Image(
                 modifier = Modifier.fillMaxSize(),
                 painter = painter,
@@ -128,11 +147,11 @@ fun HeroItemPreview() {
             about = "dajkhdkasjhdakjh ajdlkasj ...",
             rating = 4.5,
             power = 100,
-            moth = "",
+            month = "",
             day = "",
             family = listOf(),
             abilities = listOf(),
-            natureType = listOf()
+            natureTypes = listOf()
         ),
         navController = rememberNavController()
     )
